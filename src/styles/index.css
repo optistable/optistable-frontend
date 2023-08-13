@@ -1,0 +1,173 @@
+/* Colors */
+:root {
+    --primary-color: #09fbd3;
+    --primary-contrast-color: #000;
+    --secondary-color: #4f0990;
+    --secondary-contrast-color: #fff;
+    --optimism-red: #ff0420;
+    --usdc-color: #3e73c4;
+    --usdt-color: #6aad97;
+    --dai-color: #f5ac37;
+    --background-color: #000;
+    --font-stack: Poppins, Helvetica, Arial, sans-serif;
+}
+
+/* Background and Text Colors */
+.bg-primary {
+    background-color: var(--primary-color);
+}
+.bg-secondary {
+    background-color: var(--secondary-color);
+}
+.color-primary {
+    color: var(--primary-color);
+}
+.color-secondary {
+    color: var(--secondary-color);
+}
+
+/* Global Styles */
+html {
+    font-family: var(--font-stack);
+    color: white;
+    background-color: var(--background-color);
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
+/* Text Styles */
+.title {
+    font-family: var(--font-stack);
+    color: white;
+    font-size: 2rem;
+}
+.card-header {
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+.button {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+/* Button Styles */
+.contained-button {
+    text-align: center;
+    color: black;
+    background-color: #09fbd3;
+    text-transform: capitalize;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    font-weight: 700;
+    border-radius: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contained-button:hover {
+    background-color: #d7fff6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Styles */
+.card {
+    padding: 1.5rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+    background-color: #001332;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Input Styles */
+.test-input {
+    background-color: #062b55;
+    border-bottom: 1px solid #0c54a7;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    font-size: 2rem;
+}
+.test-input:focus {
+    border: none !important;
+}
+
+/* Action Card Styles */
+.action-card {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+}
+.action-card:hover {
+    background-color: #092d64;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Other Styles */
+.debug-red {
+    background-color: #f56565;
+}
+.optimism-color {
+    color: var(--optimism-red);
+}
+.usdc-background-color {
+    background-color: var(--usdc-color);
+}
+.usdt-background-color {
+    background-color: var(--usdt-color);
+}
+.dai-background-color {
+    background-color: var(--dai-color);
+}
+
+.chat-notification-logo-wrapper {
+    flex-shrink: 0;
+}
+.chat-notification-logo {
+    height: 3rem;
+    width: 3rem;
+}
+.chat-notification-content {
+    margin-left: 1.5rem;
+    padding-top: 0.25rem;
+}
+.chat-notification-title {
+    color: #1a202c;
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
+.chat-notification-message {
+    color: #718096;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.material-icons {
+    color: white;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+a {
+    @apply text-custom-anchor; /* This uses the custom color we defined */
+}
