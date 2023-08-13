@@ -251,7 +251,7 @@ export default function Subscribe() {
                             </Select>
                         </div>
                         {/*<input type={"text"} className={"test-input"}/>*/}
-                        <div
+                        {subscribingAsInsured && <div
                             className={
                                 'flex items-center justify-center space-x-4 '
                             }
@@ -265,7 +265,7 @@ export default function Subscribe() {
                                     ? watch('amount') * 0.05
                                     : '???'}
                             </p>
-                        </div>
+                        </div>}
 
                         <p className={'text-center text-2xl'}>
                             Policy activates in {getRandomNumber(100, 1000)}{' '}

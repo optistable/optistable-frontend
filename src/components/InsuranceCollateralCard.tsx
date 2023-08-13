@@ -15,7 +15,7 @@ export const InsuranceCollateralCard: React.FC<{
             </p>
         </div>
         <div className="flex justify-center">
-            <Link href={insured ? 'subscribe-insured' : 'subscribe-insurer'}>
+            <Link href={"/subscribe-insured"}>
                 <div className="contained-button flex w-fit text-center text-2xl">
                     {insured ? 'Get Insured' : 'Provide Collateral'}
                 </div>

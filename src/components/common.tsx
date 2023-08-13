@@ -1,6 +1,6 @@
-import Image, { StaticImageData } from 'next/image';
+import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
-import React, { ReactElement } from 'react';
+import React, {ReactElement} from 'react';
 import BaseLogo from '../../public/base-logo.jpeg';
 import CarmenLogo from '../../public/carmen-sandiego.png';
 import ChainlinkLogo from '../../public/chainlink-logo.svg';
@@ -14,22 +14,25 @@ import TheGraphLogo from '../../public/the-graph-logo.svg';
 import USDCIcon from '../../public/usdc.svg';
 import USDTIcon from '../../public/usdt.svg';
 import WaldoLogo from '../../public/waldo.png';
-import { Stablecoin } from '../types';
-import { getRandomBigInt, getRandomElementFromArray } from './generators';
+import {Stablecoin} from '../types';
+import {getRandomBigInt, getRandomElementFromArray} from './generators';
+import {ethers} from 'ethers';
 
 export const dataProviderToLogo = (symbol: string): StaticImageData => {
     switch (symbol) {
-        case 'chainlink-price-feed':
+        case ethers.utils.formatBytes32String('chainlink-price-feed'):
             return ChainlinkLogo;
-        case 'chainlink-base-ccip-price-feed':
+        case ethers.utils.formatBytes32String('chainlink-ccip-base'):
             return BaseLogo;
-        case 'coingecko':
+        case ethers.utils.formatBytes32String('redstone-data-feed'):
+            return CarmenLogo;
+        case ethers.utils.formatBytes32String('coingecko'):
             return CoingeckoLogo;
-        case 'hyperlane':
+        case  ethers.utils.formatBytes32String('hyperlane'):
             return HyperlaneLogo;
-        case 'layerzero':
+        case  ethers.utils.formatBytes32String('layer-zero-op-goerli'):
             return LayerZeroLogo;
-        case 'the-graph':
+        case ethers.utils.formatBytes32String('the-graph'):
             return TheGraphLogo;
         default:
             return getRandomElementFromArray([
@@ -40,15 +43,16 @@ export const dataProviderToLogo = (symbol: string): StaticImageData => {
             ]);
     }
 };
+
 export const dataProviderToTitle = (symbol: string): ReactElement => {
     switch (symbol) {
-        case 'chainlink-price-feed':
+        case ethers.utils.formatBytes32String('chainlink-price-feed'):
             return (
                 <Link href={'https://docs.chain.link/data-feeds'}>
                     Chainlink Data Feeds
                 </Link>
             );
-        case 'chainlink-base-ccip-price-feed':
+        case ethers.utils.formatBytes32String('chainlink-ccip-base'):
             return (
                 <div className={'flex'}>
                     <Link href={'https://docs.chain.link/ccip'}>
@@ -60,15 +64,15 @@ export const dataProviderToTitle = (symbol: string): ReactElement => {
                     </Link>
                 </div>
             );
-        case 'coingecko':
+        case ethers.utils.formatBytes32String('redstone-data-feed'):
             return <Link href={'https://www.coingecko.com/en'}>Coingecko</Link>;
-        case 'hyperlane':
+        case ethers.utils.formatBytes32String('layer-zero-op-goerli'):
+            return <Link href={'https://www.layerzero.network/'}>LayerZero</Link>;
+        case ethers.utils.formatBytes32String('hyperlane'):
             return <Link href={'https://www.hyperlane.xyz/'}>Hyperlane</Link>;
-        case 'layerzero':
-            return (
-                <Link href={'https://www.layerzero.network/'}>LayerZero</Link>
-            );
-        case 'the-graph':
+        case ethers.utils.formatBytes32String('coingecko'):
+            return <Link href={'https://www.coingecko.com/en'}>Coingecko</Link>;
+        case ethers.utils.formatBytes32String('the-graph'):
             return <Link href={'https://thegraph.com/'}>The Graph</Link>;
         default:
             return (
@@ -87,7 +91,7 @@ export const stablecoins: {
         symbol: 'USDC',
         name: 'US Dollar Coin',
         icon: (height, width) => (
-            <Image src={USDCIcon} height={height} width={width} alt={'USDC'} />
+            <Image src={USDCIcon} height={height} width={width} alt={'USDC'}/>
         ),
         color: '#3E73C4',
     },
@@ -96,7 +100,7 @@ export const stablecoins: {
         symbol: 'USDT',
         name: 'Tether USD',
         icon: (height, width) => (
-            <Image src={USDTIcon} height={height} width={width} alt={'USDT'} />
+            <Image src={USDTIcon} height={height} width={width} alt={'USDT'}/>
         ),
         color: '#6AAD97',
     },
@@ -105,7 +109,7 @@ export const stablecoins: {
         symbol: 'DAI',
         name: 'I do not know what DAI stands for',
         icon: (height, width) => (
-            <Image src={DAIIcon} height={height} width={width} alt={'DAI'} />
+            <Image src={DAIIcon} height={height} width={width} alt={'DAI'}/>
         ),
         color: '#F5AC37',
     },
@@ -116,6 +120,7 @@ export const stablecoins: {
     // BUSD: {address: "0x00000", symbol: "BUSD", name: "Binance USD", icon: BUSDIcon},
     // SEUR: {address: "0x00000", symbol: "SEUR", name: "Statis EUR", icon: SEURIcon},
 };
+
 const symbolToStablecoin: {
     [key: string]: Stablecoin;
 } = {
