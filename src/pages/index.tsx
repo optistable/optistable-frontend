@@ -6,6 +6,7 @@ import {useIsMounted} from '../hooks/useIsMounted';
 import {usePolicyContract} from '../hooks';
 import {useContractRead, useContractReads} from 'wagmi';
 import {PolicyContractMap, useOracleCommitteeContract} from '../hooks/usePolicyContract';
+import {data} from 'autoprefixer';
 
 
 const ActivePolicies: React.FC<{ policyContract: PolicyContractMap, policies: string[], activatedPolicies: boolean }> = ({
@@ -20,33 +21,34 @@ const ActivePolicies: React.FC<{ policyContract: PolicyContractMap, policies: st
             args: [policy],
         })),
     });
-    console.log("Active Policies, dataPolicies: ", dataPolicies)
-
-    const {data: oracleAddresses, isError: isErrorOracles, isLoading: isLoadingOracles} = useContractReads({
-        contracts: policies?.map((policy) => ({
-            ...policyContract,
-            functionName: 'getOracleCommitteeAddress',
-            args: [policy],
-        })),
-    });
 
     const oracleContract = useOracleCommitteeContract();
+    console.log(policies)
+    console.log("data policies", dataPolicies)
     const {data: oracleMeta, isError: isErrorDepegs, isLoading: isLoadingDepegs} = useContractReads({
-        contracts: oracleAddresses?.map((oracle) => ({
-            ...oracleContract,
-            address: oracle,
-            functionName: 'getOracleMetadata',
-        }))
-    });
+        contracts: dataPolicies?.map((policy) => {
+            console.log("policy", policy)
+            if (!policy) return
+            const [, , , , , oracleCommittee,] = policy;
+            console.log('oracleCommittee', oracleCommittee)
+            return {
+                ...oracleContract,
+                address: oracleCommittee,
+                functionName: 'getOracleMetadata',
+            }
+        })
+    })
+    console.log(oracleMeta)
 
-    return (!isLoadingPolicies && !isLoadingOracles && !isLoadingDepegs && <div className="grid grid-cols-3 gap-2">
-            {dataPolicies?.filter(policy => {
+    return (!isLoadingPolicies && !isLoadingDepegs && <div className="grid grid-cols-3 gap-2">
+            {dataPolicies?.filter((policy, i) => {
                 if(!policy) return false
                 const [, , , , , , policyActivated] = policy;
+                if(!oracleMeta ||  !oracleMeta[i]) return false
                 return activatedPolicies ? policyActivated : !policyActivated;
             }).map((policy, i) => {
                 console.log('Reading policy');
-                const [policyId, policyPremiumPCT, policyBlock, policyAsset, policyCollateral, policyAssetSymbolBytes32, policyActivated] = policy;
+                const [policyId, policyPremiumPCT, policyBlock, policyAsset, policyCollateral, oracleCommittee, policyActivated] = policy;
                 const [symbol, l1TokenAddress, startingBlock, endingBlock, providersReportingDepeg, providers] = oracleMeta[i]
 
                 console.log(providers)
