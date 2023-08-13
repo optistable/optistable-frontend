@@ -65,7 +65,7 @@ export default function Subscribe() {
         },
     });
 
-    // TODO @ferrodri, subscribe to policy here
+    // TODO @ferrodri, this is now wired up
     const onSubmit = handleSubmit(async (data) => {
         console.log('Raw form values', data);
         const tx = await writeAsync({
@@ -121,7 +121,10 @@ export default function Subscribe() {
                                 className={'h-16 text-5xl'}
                                 style={{
                                     backgroundColor: !subscribingAsInsured ? '#052448' : '#062b55',
-                                    width: '50%'
+                                    width: '50%',
+                                    color: !subscribingAsInsured ? "#AAA" : '#FFF',
+
+                                    border: !subscribingAsInsured ? 'unset' : '1px solid white',
                                 }}
                                 {...register('amount', {required: true})}
                                 disabled={!subscribingAsInsured}
@@ -150,7 +153,10 @@ export default function Subscribe() {
                                 className={'h-16 text-5xl'}
                                 style={{
                                     backgroundColor: subscribingAsInsured ? '#052448' : '#062b55',
-                                    width: '50%', color: '#AAA'
+                                    width: '50%',
+                                    color: subscribingAsInsured ? "#AAA" : '#FFF',
+                                    border: subscribingAsInsured ? 'unset' : '1px solid white',
+
                                 }}
                                 value={watch('amount')}
                                 disabled={subscribingAsInsured}
@@ -185,7 +191,7 @@ export default function Subscribe() {
                             {stablecoins[
                                 getValues('insurerToken').toString()
                                 ].icon(50, 50)}
-                            <p className={'text-4xl'}>{getRandomNumber(100, 1000)}</p>
+                            <p className={'text-4xl'}>{watch("amount") ? watch("amount") * 0.05 : "???" }</p>
                         </div>
 
                         <p className={'text-center text-2xl'}>

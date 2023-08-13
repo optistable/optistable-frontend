@@ -1,6 +1,7 @@
 import {useNetwork} from 'wagmi';
 import POLICY_ABI from '../shared/abi/PolicyManager.json';
 import ORACLE_COMMITTEE_ABI from '../shared/abi/OracleCommittee.json';
+import GENERIC_DATA_PROVIDER from '../shared/abi/GenericDataProvider.json';
 
 export interface PolicyContractMap {
     [chainId: number]: {
@@ -19,7 +20,7 @@ export function usePolicyContract() {
 
     const policyContract: PolicyContractMap = {
         5: {
-            address: '0x4e0dE4604eA41edA66Fa3cfaf3a51D5D4D3E1b37',
+            address: '0xC9Fd4F40b09DE3B07ccD83613A0ceAD5e8159Bb8',
             abi: POLICY_ABI.abi,
         }
 
@@ -39,6 +40,19 @@ export function useOracleCommitteeContract(){
 
     return chain?.id ? policyContract[chain?.id] : undefined;
 }
+
+export function useDataProviderContract(){
+    const {chain} = useNetwork();
+
+    const policyContract: OracleCommitteeContractMap = {
+        5: {
+            abi: GENERIC_DATA_PROVIDER.abi,
+        }
+    };
+
+    return chain?.id ? policyContract[chain?.id] : undefined;
+}
+
 
 
 // export function useOracleCommitteeContract(): `0x${string}` | undefined {

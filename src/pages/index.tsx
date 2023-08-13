@@ -20,6 +20,7 @@ const ActivePolicies: React.FC<{ policyContract: PolicyContractMap, policies: st
             args: [policy],
         })),
     });
+    console.log("Active Policies, dataPolicies: ", dataPolicies)
 
     const {data: oracleAddresses, isError: isErrorOracles, isLoading: isLoadingOracles} = useContractReads({
         contracts: policies?.map((policy) => ({
@@ -93,21 +94,8 @@ export default function Home() {
                                 <InsuranceCollateralCard insured={false}/>
                             </div>
                         </div>
-                        <p className="title text-5xl">
-                            Upcoming Policies
-                        </p>
-                        <p className="title mt-16 text-5xl">Active Policies</p>
-                        <div className="grid grid-cols-3 gap-2">
-                            <div className="col-span-1">
-                                <PolicyCard policy={generatePolicy()}/>
-                            </div>
-                            <div className="col-span-1">
-                                <PolicyCard policy={generatePolicy()}/>
-                            </div>
-                            <div className="col-span-1">
-                                <PolicyCard policy={generatePolicy()}/>
-                            </div>
-                        </div>
+                        <p className="title mt-16 text-5xl">Upcoming Policies</p>
+                            <ActivePolicies policyContract={policyContract} policies={data1} activatedPolicies={false}/>
 
                         <p className="title mt-16 text-5xl">Active Policies</p>
                         <ActivePolicies policyContract={policyContract} policies={data1} activatedPolicies={true}/>
