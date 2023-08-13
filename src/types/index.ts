@@ -3,7 +3,9 @@ import { StaticImageData } from 'next/image';
 import { ReactElement } from 'react';
 
 export enum Chain {
-  Goerli = 5
+  Goerli = 5,
+  GoerliBase = 84531,
+  SepoliaMode = 919
 }
 
 // TODO @ferrodri, verify matches contract

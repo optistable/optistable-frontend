@@ -22,7 +22,15 @@ export function usePolicyContract() {
         5: {
             address: '0xC9Fd4F40b09DE3B07ccD83613A0ceAD5e8159Bb8',
             abi: POLICY_ABI.abi,
-        }
+        },
+        84531: {
+            address: '0x580e79C5797B66101C248f8eaD0cC3f5a7d59b33',
+            abi: POLICY_ABI.abi,
+        },
+        919: {
+            address: '0x222e9a549274B796715a4af8a9BB96bC6EFCd13A',
+            abi: POLICY_ABI.abi,
+        },
 
     };
 
