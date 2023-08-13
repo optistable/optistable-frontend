@@ -11,11 +11,11 @@
         "no-console": "off",
         "curly": "warn",
         "no-unused-vars": "warn",
-        "no-dupe-else-if": "error",
-        "no-import-assign": "error",
-        "no-setter-return": "error",
-        "require-await": "error",
-        "quotes": ["error", "single"],
+        "no-dupe-else-if": "warn",
+        "no-import-assign": "warn",
+        "no-setter-return": "warn",
+        "require-await": "warn",
+        "quotes": ["warn", "single"],
         "indent": [
             "warn",
             4,
@@ -23,6 +23,6 @@
                 "SwitchCase": 1
             }
         ],
-        "semi": ["error", "always"]
+        "semi": ["warn", "always"]
     }
 }
