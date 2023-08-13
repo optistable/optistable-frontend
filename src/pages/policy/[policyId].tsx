@@ -1,14 +1,22 @@
 'use client';
-import Image, {StaticImageData} from 'next/image';
-import {ReactElement, useEffect} from 'react';
-import {DataProvider} from '../../types';
-import {generateDataProvider, generateOracleCommittee} from '../../components/generators';
-import {useRouter} from 'next/router';
-import {usePolicyContract} from '../../hooks';
-import {useContractRead, useContractReads} from 'wagmi';
-import {useDataProviderContract, useOracleCommitteeContract} from '../../hooks/usePolicyContract';
-import {dataProviderToLogo, dataProviderToTitle} from '../../components/common';
-
+import Image, { StaticImageData } from 'next/image';
+import { ReactElement, useEffect } from 'react';
+import { DataProvider } from '../../types';
+import {
+    generateDataProvider,
+    generateOracleCommittee,
+} from '../../components/generators';
+import { useRouter } from 'next/router';
+import { usePolicyContract } from '../../hooks';
+import { useContractRead, useContractReads } from 'wagmi';
+import {
+    useDataProviderContract,
+    useOracleCommitteeContract,
+} from '../../hooks/usePolicyContract';
+import {
+    dataProviderToLogo,
+    dataProviderToTitle,
+} from '../../components/common';
 
 const hexToRgb = (hex: string) => {
     // Remove pound sign if present
@@ -22,8 +30,11 @@ const hexToRgb = (hex: string) => {
     return [r, g, b];
 };
 
-const transitionColors = (startColor: [number, number, number], endColor: [number, number, number], steps: number) => {
-
+const transitionColors = (
+    startColor: [number, number, number],
+    endColor: [number, number, number],
+    steps: number
+) => {
     const rStep = (endColor[0] - startColor[0]) / (steps - 1);
     const gStep = (endColor[1] - startColor[1]) / (steps - 1);
     const bStep = (endColor[2] - startColor[2]) / (steps - 1);
@@ -35,7 +46,9 @@ const transitionColors = (startColor: [number, number, number], endColor: [numbe
         const g = Math.round(endColor[1] + i * gStep);
         const b = Math.round(endColor[2] + i * bStep);
 
-        const hexColor = `#${(r < 16 ? '0' : '') + r.toString(16)}${(g < 16 ? '0' : '') + g.toString(16)}${(b < 16 ? '0' : '') + b.toString(16)}`;
+        const hexColor = `#${(r < 16 ? '0' : '') + r.toString(16)}${
+            (g < 16 ? '0' : '') + g.toString(16)
+        }${(b < 16 ? '0' : '') + b.toString(16)}`;
 
         transitionColorsArray.push(hexColor);
     }
@@ -43,18 +56,25 @@ const transitionColors = (startColor: [number, number, number], endColor: [numbe
     return transitionColorsArray;
 };
 
-const ProviderCard = ({provider}: { provider: DataProvider }) => {
+const ProviderCard = ({ provider }: { provider: DataProvider }) => {
+    const humanReadablePrice = Number(provider.lastObservation) / 100000000;
 
-    const humanReadablePrice = (Number(provider.lastObservation) / 100000000)
-
-    return (<div className={'card w-3xl h-full'}>
+    return (
+        <div className={'card w-3xl h-full'}>
             <div className={' justify-between text-center'}>
-
-                <Image className={'m-auto'} src={provider.logo} height={80} alt={'logo'}/>
+                <Image
+                    className={'m-auto'}
+                    src={provider.logo}
+                    height={80}
+                    alt={'logo'}
+                />
                 <div className={'text-xl'}>{provider.title}</div>
                 <div className={'text-xl'}>${humanReadablePrice}</div>
                 {/*TODO color hint when depegged vs depegged*/}
-                <div className={'text-xl'} style={{color: provider.depegged ? '#ffa28a' : '#a3ff90'}}>
+                <div
+                    className={'text-xl'}
+                    style={{ color: provider.depegged ? '#ffa28a' : '#a3ff90' }}
+                >
                     {provider.depegged ? 'Depegged' : 'Not Depegged'}
                 </div>
             </div>
@@ -62,7 +82,6 @@ const ProviderCard = ({provider}: { provider: DataProvider }) => {
     );
 };
 export default function PolicyDrilldown() {
-
     const router = useRouter();
     const policyId = router.query.policyId;
 
@@ -70,23 +89,30 @@ export default function PolicyDrilldown() {
     const policyContract = usePolicyContract();
     const oracleCommitteeContract = useOracleCommitteeContract();
     const dataProviderContract = useDataProviderContract();
-    const {data: policyData, isError: policyError, isLoading: policyLoading} = useContractRead(
-        {
-            ...policyContract,
-            functionName: 'getMetadataForPolicy',
-            args: [policyId]
-        }
-    );
-
-    const {data: committeeData, isError: committeeError, isLoading: committeeLoading} = useContractRead({
-        ...oracleCommitteeContract,
-        functionName: 'getOracleMetadata',
-        address: policyData?.[5]
+    const {
+        data: policyData,
+        isError: policyError,
+        isLoading: policyLoading,
+    } = useContractRead({
+        ...policyContract,
+        functionName: 'getMetadataForPolicy',
+        args: [policyId],
     });
 
     const {
-        data: providerData, isError: providerError
-        , isLoading: providerLoading
+        data: committeeData,
+        isError: committeeError,
+        isLoading: committeeLoading,
+    } = useContractRead({
+        ...oracleCommitteeContract,
+        functionName: 'getOracleMetadata',
+        address: policyData?.[5],
+    });
+
+    const {
+        data: providerData,
+        isError: providerError,
+        isLoading: providerLoading,
     } = useContractReads({
         // contracts: committeeData?.providers.map((providerAddress: string) => ({
         contracts: committeeData?.[5].map((providerAddress: string) => {
@@ -94,9 +120,9 @@ export default function PolicyDrilldown() {
                 ...dataProviderContract,
                 functionName: 'getProviderMetadata',
                 address: providerAddress,
-                watch: true
+                watch: true,
             };
-        })
+        }),
     });
 
     console.log('policyError: ', policyError);
@@ -110,56 +136,80 @@ export default function PolicyDrilldown() {
         return <div>Policy not found</div>;
     }
 
-//Bytes32 raw strings
-//  "0x636861696e6c696e6b2d646174612d6665656400000000000000000000000000"
-// "0x636861696e6c696e6b2d636369702d6261736500000000000000000000000000"
-// "0x72656473746f6e652d646174612d666565640000000000000000000000000000"
-//     "0x6c617965722d7a65726f2d6f702d676f65726c69000000000000000000000000"
-//     "0x636f696e6765636b6f0000000000000000000000000000000000000000000000"
-
+    //Bytes32 raw strings
+    //  "0x636861696e6c696e6b2d646174612d6665656400000000000000000000000000"
+    // "0x636861696e6c696e6b2d636369702d6261736500000000000000000000000000"
+    // "0x72656473746f6e652d646174612d666565640000000000000000000000000000"
+    //     "0x6c617965722d7a65726f2d6f702d676f65726c69000000000000000000000000"
+    //     "0x636f696e6765636b6f0000000000000000000000000000000000000000000000"
 
     // params.policyId for policy
     const committee = generateOracleCommittee();
-    const providers = [generateDataProvider('USDC'), generateDataProvider('USDT'), generateDataProvider('DAI')];
+    const providers = [
+        generateDataProvider('USDC'),
+        generateDataProvider('USDT'),
+        generateDataProvider('DAI'),
+    ];
 
-
-    console.log(`mix(#FF0000, #00FF00, ${(committee.providersReportingDepegs / committee.providers.length) * 100}%)`);
+    console.log(
+        `mix(#FF0000, #00FF00, ${
+            (committee.providersReportingDepegs / committee.providers.length) *
+            100
+        }%)`
+    );
     console.log('TEST');
 
-    return (!policyLoading && !committeeLoading && !providerLoading && <div className={'grid grid-cols-6 gap-8'}>
-            <div className={'col-span-5 space-y-8'}>
-                <p className={'text-5xl mt-16'}>Committee</p>
-                <p className={'text-3xl mt-16'} style={{
-                    color: `mix(#FF0000, #00FF00, ${(committee.providersReportingDepegs / committee.providers.length) * 100}%)`
-                }}>
-                    {committee.providersReportingDepegs}/{committee.providers.length} Depegged
-                </p>
+    return (
+        !policyLoading &&
+        !committeeLoading &&
+        !providerLoading && (
+            <div className={'grid grid-cols-6 gap-8'}>
+                <div className={'col-span-5 space-y-8'}>
+                    <p className={'mt-16 text-5xl'}>Committee</p>
+                    <p
+                        className={'mt-16 text-3xl'}
+                        style={{
+                            color: `mix(#FF0000, #00FF00, ${
+                                (committee.providersReportingDepegs /
+                                    committee.providers.length) *
+                                100
+                            }%)`,
+                        }}
+                    >
+                        {committee.providersReportingDepegs}/
+                        {committee.providers.length} Depegged
+                    </p>
 
-                <div className={'grid grid-cols-3 gap-8'}>
-                    {providerData.map((provider, i) => {
-                        const [symbol, oracleType, lastBlockNum, lastObservation, switchStatusCounter, lastObservationDepegged] = provider;
-                        const p: DataProvider = {
-                            symbol: symbol,
-                            oracleType: oracleType,
-                            logo: dataProviderToLogo(oracleType),
-                            title: dataProviderToTitle(oracleType),
-                            lastBlockNum: lastBlockNum,
-                            switchStatusCounter: switchStatusCounter,
-                            lastObservation: lastObservation,
-                            depegged: lastObservationDepegged //Not an accurate value
-                        };
-                        return (
-                            <div key={i} className={'grid-cols-1'}>
-                                <ProviderCard provider={p}/>
-                            </div>);
-                    })}
+                    <div className={'grid grid-cols-3 gap-8'}>
+                        {providerData.map((provider, i) => {
+                            const [
+                                symbol,
+                                oracleType,
+                                lastBlockNum,
+                                lastObservation,
+                                switchStatusCounter,
+                                lastObservationDepegged,
+                            ] = provider;
+                            const p: DataProvider = {
+                                symbol: symbol,
+                                oracleType: oracleType,
+                                logo: dataProviderToLogo(oracleType),
+                                title: dataProviderToTitle(oracleType),
+                                lastBlockNum: lastBlockNum,
+                                switchStatusCounter: switchStatusCounter,
+                                lastObservation: lastObservation,
+                                depegged: lastObservationDepegged, //Not an accurate value
+                            };
+                            return (
+                                <div key={i} className={'grid-cols-1'}>
+                                    <ProviderCard provider={p} />
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className={'grid grid-cols-3'}></div>
                 </div>
-                <div className={'grid grid-cols-3'}>
-                </div>
-
             </div>
-        </div>
-
+        )
     );
-
 }

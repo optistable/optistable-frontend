@@ -1,21 +1,21 @@
 {
-  "abi": [],
-  "bytecode": {
-    "object": "0x",
-    "linkReferences": {}
-  },
-  "deployedBytecode": {
-    "object": "0x",
-    "linkReferences": {}
-  },
-  "ast": {
-    "absolutePath": "test/Policy.t.sol",
-    "id": 51211,
-    "exportedSymbols": {},
-    "nodeType": "SourceUnit",
-    "src": "8871:0:57",
-    "nodes": [],
-    "license": "MIT"
-  },
-  "id": 57
+    "abi": [],
+    "bytecode": {
+        "object": "0x",
+        "linkReferences": {}
+    },
+    "deployedBytecode": {
+        "object": "0x",
+        "linkReferences": {}
+    },
+    "ast": {
+        "absolutePath": "test/Policy.t.sol",
+        "id": 51211,
+        "exportedSymbols": {},
+        "nodeType": "SourceUnit",
+        "src": "8871:0:57",
+        "nodes": [],
+        "license": "MIT"
+    },
+    "id": 57
 }

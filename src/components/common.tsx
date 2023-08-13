@@ -1,6 +1,6 @@
-import Image, {StaticImageData} from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 import BaseLogo from '../../public/base-logo.jpeg';
 import CarmenLogo from '../../public/carmen-sandiego.png';
 import ChainlinkLogo from '../../public/chainlink-logo.svg';
@@ -14,9 +14,9 @@ import TheGraphLogo from '../../public/the-graph-logo.svg';
 import USDCIcon from '../../public/usdc.svg';
 import USDTIcon from '../../public/usdt.svg';
 import WaldoLogo from '../../public/waldo.png';
-import {Stablecoin} from '../types';
-import {getRandomBigInt, getRandomElementFromArray} from './generators';
-import {ethers} from 'ethers';
+import { Stablecoin } from '../types';
+import { getRandomBigInt, getRandomElementFromArray } from './generators';
+import { ethers } from 'ethers';
 
 export const dataProviderToLogo = (symbol: string): StaticImageData => {
     switch (symbol) {
@@ -28,9 +28,9 @@ export const dataProviderToLogo = (symbol: string): StaticImageData => {
             return CarmenLogo;
         case ethers.utils.formatBytes32String('coingecko'):
             return CoingeckoLogo;
-        case  ethers.utils.formatBytes32String('hyperlane'):
+        case ethers.utils.formatBytes32String('hyperlane'):
             return HyperlaneLogo;
-        case  ethers.utils.formatBytes32String('layer-zero-op-goerli'):
+        case ethers.utils.formatBytes32String('layer-zero-op-goerli'):
             return LayerZeroLogo;
         case ethers.utils.formatBytes32String('the-graph'):
             return TheGraphLogo;
@@ -67,7 +67,9 @@ export const dataProviderToTitle = (symbol: string): ReactElement => {
         case ethers.utils.formatBytes32String('redstone-data-feed'):
             return <Link href={'https://www.coingecko.com/en'}>Coingecko</Link>;
         case ethers.utils.formatBytes32String('layer-zero-op-goerli'):
-            return <Link href={'https://www.layerzero.network/'}>LayerZero</Link>;
+            return (
+                <Link href={'https://www.layerzero.network/'}>LayerZero</Link>
+            );
         case ethers.utils.formatBytes32String('hyperlane'):
             return <Link href={'https://www.hyperlane.xyz/'}>Hyperlane</Link>;
         case ethers.utils.formatBytes32String('coingecko'):
@@ -91,7 +93,7 @@ export const stablecoins: {
         symbol: 'USDC',
         name: 'US Dollar Coin',
         icon: (height, width) => (
-            <Image src={USDCIcon} height={height} width={width} alt={'USDC'}/>
+            <Image src={USDCIcon} height={height} width={width} alt={'USDC'} />
         ),
         color: '#3E73C4',
     },
@@ -100,7 +102,7 @@ export const stablecoins: {
         symbol: 'USDT',
         name: 'Tether USD',
         icon: (height, width) => (
-            <Image src={USDTIcon} height={height} width={width} alt={'USDT'}/>
+            <Image src={USDTIcon} height={height} width={width} alt={'USDT'} />
         ),
         color: '#6AAD97',
     },
@@ -109,7 +111,7 @@ export const stablecoins: {
         symbol: 'DAI',
         name: 'I do not know what DAI stands for',
         icon: (height, width) => (
-            <Image src={DAIIcon} height={height} width={width} alt={'DAI'}/>
+            <Image src={DAIIcon} height={height} width={width} alt={'DAI'} />
         ),
         color: '#F5AC37',
     },

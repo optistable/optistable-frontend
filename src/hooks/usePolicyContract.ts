@@ -5,13 +5,13 @@ import POLICY_ABI from '../shared/abi/PolicyManager.json';
 
 export interface PolicyContractMap {
     [chainId: number]: {
-        address: `0x${string}`,
-        abi: any
+        address: `0x${string}`;
+        abi: any;
     };
 }
 export interface OracleCommitteeContractMap {
     [chainId: number]: {
-        abi: any
+        abi: any;
     };
 }
 
@@ -31,7 +31,6 @@ export function usePolicyContract() {
             address: '0x222e9a549274B796715a4af8a9BB96bC6EFCd13A',
             abi: POLICY_ABI.abi,
         },
-
     };
 
     return chain?.id ? policyContract[chain?.id] : undefined;
@@ -42,8 +41,7 @@ export function useOracleCommitteeContract() {
     const policyContract: OracleCommitteeContractMap = {
         5: {
             abi: ORACLE_COMMITTEE_ABI.abi,
-        }
-
+        },
     };
 
     return chain?.id ? policyContract[chain?.id] : undefined;
@@ -55,13 +53,11 @@ export function useDataProviderContract() {
     const policyContract: OracleCommitteeContractMap = {
         5: {
             abi: GENERIC_DATA_PROVIDER.abi,
-        }
+        },
     };
 
     return chain?.id ? policyContract[chain?.id] : undefined;
 }
-
-
 
 // export function useOracleCommitteeContract(): `0x${string}` | undefined {
 //     const { chain } = useNetwork();

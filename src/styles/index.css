@@ -30,7 +30,7 @@
 html {
     font-family: var(--font-stack);
     color: white;
-    background-color: var(--background-color)!important;
+    background-color: var(--background-color) !important;
     height: 100%;
 }
 body {
@@ -108,7 +108,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
-.transition-200-ms{
+.transition-200-ms {
     transition-property: all;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -191,7 +191,6 @@ body {
     @apply text-custom-anchor; /* This uses the custom color we defined */
 }
 
-
 /*Below hides number controls in input types*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -200,6 +199,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
     -moz-appearance: textfield;
 }

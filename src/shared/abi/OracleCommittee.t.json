@@ -1,21 +1,21 @@
 {
-  "abi": [],
-  "bytecode": {
-    "object": "0x",
-    "linkReferences": {}
-  },
-  "deployedBytecode": {
-    "object": "0x",
-    "linkReferences": {}
-  },
-  "ast": {
-    "absolutePath": "test/OracleCommittee.t.sol",
-    "id": 43158,
-    "exportedSymbols": {},
-    "nodeType": "SourceUnit",
-    "src": "5596:0:31",
-    "nodes": [],
-    "license": "MIT"
-  },
-  "id": 31
+    "abi": [],
+    "bytecode": {
+        "object": "0x",
+        "linkReferences": {}
+    },
+    "deployedBytecode": {
+        "object": "0x",
+        "linkReferences": {}
+    },
+    "ast": {
+        "absolutePath": "test/OracleCommittee.t.sol",
+        "id": 43158,
+        "exportedSymbols": {},
+        "nodeType": "SourceUnit",
+        "src": "5596:0:31",
+        "nodes": [],
+        "license": "MIT"
+    },
+    "id": 31
 }

@@ -251,21 +251,23 @@ export default function Subscribe() {
                             </Select>
                         </div>
                         {/*<input type={"text"} className={"test-input"}/>*/}
-                        {subscribingAsInsured && <div
-                            className={
-                                'flex items-center justify-center space-x-4 '
-                            }
-                        >
-                            <p className={'mr-8 text-2xl'}>Premium</p>
-                            {stablecoins[
-                                getValues('insurerToken').toString()
-                            ].icon(50, 50)}
-                            <p className={'text-4xl'}>
-                                {watch('amount')
-                                    ? watch('amount') * 0.05
-                                    : '???'}
-                            </p>
-                        </div>}
+                        {subscribingAsInsured && (
+                            <div
+                                className={
+                                    'flex items-center justify-center space-x-4 '
+                                }
+                            >
+                                <p className={'mr-8 text-2xl'}>Premium</p>
+                                {stablecoins[
+                                    getValues('insurerToken').toString()
+                                ].icon(50, 50)}
+                                <p className={'text-4xl'}>
+                                    {watch('amount')
+                                        ? watch('amount') * 0.05
+                                        : '???'}
+                                </p>
+                            </div>
+                        )}
 
                         <p className={'text-center text-2xl'}>
                             Policy activates in {getRandomNumber(100, 1000)}{' '}
