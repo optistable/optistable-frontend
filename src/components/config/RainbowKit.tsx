@@ -69,13 +69,7 @@ const needsInjectedWallet =
     !window.ethereum.isCoinbaseWallet;
 
 const { chains, provider } = configureChains(
-    [
-        CHAIN_ID === Chain.Goerli
-            ? goerli
-            : CHAIN_ID === Chain.GoerliBase
-            ? goerliBase
-            : sepoliaMode,
-    ],
+    [goerli, goerliBase, sepoliaMode],
     [
         alchemyProvider({
             apiKey: ALCHEMY_KEY,
