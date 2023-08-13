@@ -3,8 +3,8 @@ import RainbowKit from 'components/config/RainbowKit';
 import ReactQuery from 'components/config/ReactQuery';
 import AppLayout from 'components/layouts/AppLayout';
 import type { AppProps } from 'next/app';
-import 'styles/globals.css';
-import 'styles/rainbowkit.css';
+import '../styles/globals.css';
+import '../styles/rainbowkit.css';
 import '../styles/index.css';
 
 export default function App({ Component, pageProps }: AppProps) {

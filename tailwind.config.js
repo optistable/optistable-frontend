@@ -10,6 +10,10 @@ module.exports = {
                 black: '#121212',
                 'optimism-color': '#FF0420',
                 custom: {
+                    primary: '#09fbd3',
+                    primaryContrast: '#000000',
+                    secondary: '#4f0990',
+                    secondaryContrast: '#ffffff',
                     anchor: '#d191d9',
                 },
             },

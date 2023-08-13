@@ -78,10 +78,7 @@ export const dataProviderToTitle = (symbol: string): ReactElement => {
             );
     }
 };
-/*
-TODO @ferrodri, verify addresses here (these are all ones that I minted, see command below to repeat for yourself (add yourself to the mint addresses in the script)
-* forge script script/DeployStablecoinERC20.s.sol --private-key $PRIVATE_KEY --broadcast --rpc-url $ETH_RPC_URL
- */
+
 export const stablecoins: {
     [key: string]: Stablecoin;
 } = {
@@ -158,6 +155,5 @@ export const amounts = () => {
             ></div>
         );
     });
-    console.log(elems);
     return elems;
 };

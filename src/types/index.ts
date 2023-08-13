@@ -8,7 +8,7 @@ export enum Chain {
 
 // TODO @ferrodri, verify matches contract
 export type Policy = {
-  address: string;
+  policyId: string,
   insuredTokenAddress: string;
   collateralTokenAddress: string;
   insuredAmount: bigint;

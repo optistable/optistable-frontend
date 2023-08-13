@@ -2,7 +2,7 @@
 :root {
     --primary-color: #09fbd3;
     --primary-contrast-color: #000;
-    --secondary-color: #4f0990;
+    --secondary-color: #8014a4;
     --secondary-contrast-color: #fff;
     --optimism-red: #ff0420;
     --usdc-color: #3e73c4;
@@ -30,7 +30,7 @@
 html {
     font-family: var(--font-stack);
     color: white;
-    background-color: var(--background-color);
+    background-color: var(--background-color)!important;
     height: 100%;
 }
 body {
@@ -57,8 +57,22 @@ body {
 /* Button Styles */
 .contained-button {
     text-align: center;
-    color: black;
-    background-color: #09fbd3;
+    text-transform: capitalize;
+    --tw-text-opacity: 1;
+    background-color: var(--primary-color);
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    font-weight: 700;
+    border-radius: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contained-uncolored-button {
+    text-align: center;
     text-transform: capitalize;
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -72,8 +86,35 @@ body {
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+.contained-secondary-button {
+    text-align: center;
+    text-transform: capitalize;
+    --tw-text-opacity: 1;
+    background-color: var(--secondary-color);
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    font-weight: 700;
+    border-radius: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contained-secondary-button:hover {
+    background-color: #a21bb2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.transition-200-ms{
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
 .contained-button:hover {
-    background-color: #d7fff6;
+    background-color: #00e9b0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
@@ -128,28 +169,6 @@ body {
     background-color: var(--dai-color);
 }
 
-.chat-notification-logo-wrapper {
-    flex-shrink: 0;
-}
-.chat-notification-logo {
-    height: 3rem;
-    width: 3rem;
-}
-.chat-notification-content {
-    margin-left: 1.5rem;
-    padding-top: 0.25rem;
-}
-.chat-notification-title {
-    color: #1a202c;
-    font-size: 1.25rem;
-    line-height: 1.25;
-}
-.chat-notification-message {
-    color: #718096;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
 .material-icons {
     color: white;
     font-family: 'Material Icons';
@@ -168,6 +187,19 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
 }
-a {
+.mild-highlight-link {
     @apply text-custom-anchor; /* This uses the custom color we defined */
+}
+
+
+/*Below hides number controls in input types*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
