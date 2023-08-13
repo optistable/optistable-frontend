@@ -20,7 +20,7 @@ export default function Navbar() {
                         </div>
                     </Link>
                     <div className="nav-link flex items-center p-2">
-                        <Link href="/subscribe">Get Insured</Link>
+                        <Link href="/subscribe-insured">Get Insured</Link>
                     </div>
                 </div>
 
